@@ -1,0 +1,35 @@
+#!/usr/bin/env groovy
+properties([
+    [$class: 'GithubProjectProperty',
+    displayName: '',
+    projectUrlStr: 'https://github.com/veena-org/repo2.git'],
+    pipelineTriggers([ triggers: [
+            [
+                $class: 'jenkins.triggers.ReverseBuildTrigger',
+                upstreamProjects: "some_project", threshold: hudson.model.Result.SUCCESS
+            ]
+        ]])])
+
+pipeline {
+    agent any 
+
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'pwd' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'java -version'
+                
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'ls'
+                sh 'pwd'
+            }
+        }
+    }
+}
