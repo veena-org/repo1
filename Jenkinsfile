@@ -2,8 +2,11 @@
 properties([
     [$class: 'GithubProjectProperty',
     displayName: '',
-    projectUrlStr: 'https://github.com/VeridicSolutions99/Veridic_Atlanta.git/'],
-    pipelineTriggers([githubPush()])])
+    projectUrlStr: 'https://github.com/veena-org/repo1'],
+    pipelineTriggers([upstream(
+      threshold: 'SUCCESS',
+      upstreamProjects: 'https://github.com/veena-org/repo2'
+    )])])
 
 pipeline {
     agent any 
